@@ -8,18 +8,12 @@ A concurrent, high-performance TCP Echo Server written from scratch in Go with g
 - **Graceful Shutdown:** Intercepts `SIGINT` (Ctrl+C) and `SIGTERM` to cleanly drain active connections without socket leaks.
 - **Configurable CLI Flags:** Customize port, bind address, buffer sizes, and idle timeouts.
 - **Lock-Free Atomic Metrics:** Real-time tracking of total connections, active connections, and total bytes echoed via `sync/atomic`.
-- **Built-in Benchmark Tool:** Includes an interactive client and multi-worker stress testing tool.
+- **Built-in Benchmark Tool:** Includes a multi-worker stress testing client.
 
 ---
 
-## Demos & Screenshots
+## Benchmark Demo
 
-### 1. Live Interactive Testing
-Connect to the server and echo messages in real time:
-
-![Live Interactive Mode](screenshots/interactive.png)
-
-### 2. High-Throughput Benchmark
 Running 20 concurrent workers executing 2,000 requests (1KB payloads) on local sockets:
 
 ![Benchmark Results](screenshots/benchmark.png)
@@ -65,19 +59,13 @@ go build -o tcp-echo-server.exe .
 
 ## Testing the Server
 
-### 1. Live Interactive Mode
-Connect to the server and send messages live from the terminal:
-```powershell
-go run ./cmd/client/main.go -addr 127.0.0.1:8080
-```
-
-### 2. High-Speed Benchmark
+### 1. High-Speed Benchmark
 Run a high-concurrency stress test with 20 workers sending 100 requests each (1KB payloads):
 ```powershell
 go run ./cmd/client/main.go -addr 127.0.0.1:8080 -bench -concurrency 20 -requests 100 -size 1024
 ```
 
-### 3. Netcat
+### 2. Netcat
 Connect using standard netcat (WSL / Linux / macOS):
 ```bash
 nc 127.0.0.1 8080
